@@ -1,4 +1,5 @@
 # Airbnb Europe Dataset Analysis
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group28.git/main)
 
 ## Overview
 This project aims to predict the prices of Airbnb listings in Europe using various regression models. The scientific motivation behind this project is to help both hosts and guests make more informed decisions when it comes to pricing and choosing accommodations. The analysis consists of data cleaning, exploratory data analysis, feature engineering, model building, and evaluation. 
@@ -40,22 +41,19 @@ The repository is structured as follows:
 
 To build the JupyterBook website locally, run:
 
-	`make html`
+	make html
 
 To clean up build files, run:
 
-	`make clean`
+	make clean
 
 To execute all notebooks, run:
 
-	`make all`
+	make all
 	
 ## Testing
 To run tests, navigate to the root directory of the project and execute the following command:
 	`PYTHONPATH=./ pytest`
-
-## Launch Interactive Binder
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group28.git/main)
 
 ## License
 
