@@ -1,6 +1,8 @@
 format: jb-book
 root: README.md
+parts:
 chapters:
+- caption: Main
   - file: main.ipynb
 - caption: Data Analysis
   chapters:
