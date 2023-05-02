@@ -52,7 +52,7 @@ To execute all notebooks, run:
 	
 ## Testing
 To run tests, navigate to the root directory of the project and execute the following command:
-	`pytest`
+	`PYTHONPATH=./ pytest`
 
 ## Launch Interactive Binder
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group28.git/main)

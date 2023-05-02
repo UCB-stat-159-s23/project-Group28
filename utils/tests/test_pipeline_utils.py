@@ -1,11 +1,6 @@
 import numpy as np
-from utils.pipeline_utils import (
-	create_pipelines, 
-	create_summary,
-	calculate_metrics, 
-	display_results
-)
-
+import pandas as pd
+from utils.pipeline_utils import create_pipelines, create_summary, calculate_metrics, display_results
 
 def test_create_pipelines():
     pipes = create_pipelines()
