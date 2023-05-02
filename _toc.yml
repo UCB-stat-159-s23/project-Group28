@@ -1,0 +1,7 @@
+format: jb-book
+root: main
+parts:
+- caption: Analysis
+  chapters:
+  - file: data_clean.ipynb
+  - file: build_model.ipynb
