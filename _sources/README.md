@@ -9,15 +9,15 @@ The project's JupyterBook website can be accessed [here](https://ucb-stat-159-s2
 
 The repository is structured as follows:
 
-* 'data/': Contains the raw dataset and processed data files
-* 'figures/': Contains the generated figures and plots
-* 'results/': Contains the results obtained from model training and evaluation
-* 'utils/': Contains utility functions and modules used throughout the project
-* 'main.ipynb': Main project notebook, providing an overview of the analysis and results
-* 'data_cleaning.ipynb': Notebook containing data cleaning and preprocessing steps
-* 'model_building.ipynb': Notebook containing model training and evaluation steps
-* 'environment.yml': Environment file with required packages for the project
-* 'Makefile': Makefile to build JupyterBook for the repository and manage other tasks
+* `data/`: Contains the raw dataset and processed data files
+* `figures/`: Contains the generated figures and plots
+* `results/`: Contains the results obtained from model training and evaluation
+* `utils/`: Contains utility functions and modules used throughout the project
+* `main.ipynb`: Main project notebook, providing an overview of the analysis and results
+* `data_cleaning.ipynb`: Notebook containing data cleaning and preprocessing steps
+* `model_building.ipynb`: Notebook containing model training and evaluation steps
+* `environment.yml`: Environment file with required packages for the project
+* `Makefile`: Makefile to build JupyterBook for the repository and manage other tasks
 
 ## Setup and Installation
 
@@ -35,13 +35,16 @@ The repository is structured as follows:
 ## Usage
 
 To build the JupyterBook website locally, run:
-	make html
+
+	`make html`
 
 To clean up build files, run:
-	make clean
+
+	`make clean`
 
 To execute all notebooks, run:
-	make all
+
+	`make all`
 
 ## Launch Interactive Binder
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group28.git/main)
