@@ -21,7 +21,3 @@ clean:
 	rm -f results/*.csv
 	rm -rf _build/html/
 
-# run all the notebooks
-.PHONY: all
-all:
-	bash -i run_codes.sh
