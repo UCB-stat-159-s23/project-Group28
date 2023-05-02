@@ -325,6 +325,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-building-and-evaluation">Model Building and Evaluation</a></li>
 </ul>
 </li>
 </ul>
@@ -344,6 +345,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">utils.pipeline_utils</span> <span class="kn">import</span> <span class="n">create_pipelines</span>
 </pre></div>
 </div>
 </div>
@@ -708,7 +710,167 @@ document.write(`
 <img alt="_images/3e8c987f61c273938e0da27a047132f101b87293fa8c75f96cd8684dbe701276.png" src="_images/3e8c987f61c273938e0da27a047132f101b87293fa8c75f96cd8684dbe701276.png" />
 </div>
 </div>
-<p>6.Finally, we looped through the x variables and created separate plots for each one to further explore relationships between variables in the dataset.</p>
+</section>
+<section id="model-building-and-evaluation">
+<h3>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this heading">#</a></h3>
+<p>In the Model Building and Evaluation section, various machine learning models are built to predict the price of Airbnb listings. The primary objective is to identify the most effective model for this purpose.</p>
+<p>To achieve this, the dataset is first split into training, validation, and testing sets. The training set is used to train the models, the validation set helps tune hyperparameters, and the testing set is employed to evaluate the final model’s performance.</p>
+<p>The chosen models for this project are Random Forest, Lasso Regression, and Ridge Regression. These models are combined with different imputation methods (Simple Imputer and K-Nearest Neighbors Imputer) to handle any missing values in the data. A total of six combinations are created by pairing each model with an imputation method, and each combination is represented as a pipeline.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">create_pipelines</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;simple_imputer+rf&#39;: Pipeline(steps=[(&#39;simple_imputer&#39;, SimpleImputer(strategy=&#39;most_frequent&#39;)),
+                 (&#39;rf&#39;, RandomForestRegressor(min_samples_leaf=5))]),
+ &#39;simple_imputer+lasso&#39;: Pipeline(steps=[(&#39;simple_imputer&#39;, SimpleImputer(strategy=&#39;most_frequent&#39;)),
+                 (&#39;lasso&#39;, Lasso())]),
+ &#39;simple_imputer+ridge&#39;: Pipeline(steps=[(&#39;simple_imputer&#39;, SimpleImputer(strategy=&#39;most_frequent&#39;)),
+                 (&#39;ridge&#39;, Ridge())]),
+ &#39;knn_imputer+rf&#39;: Pipeline(steps=[(&#39;knn_imputer&#39;, KNNImputer()),
+                 (&#39;rf&#39;, RandomForestRegressor(min_samples_leaf=5))]),
+ &#39;knn_imputer+lasso&#39;: Pipeline(steps=[(&#39;knn_imputer&#39;, KNNImputer()), (&#39;lasso&#39;, Lasso())]),
+ &#39;knn_imputer+ridge&#39;: Pipeline(steps=[(&#39;knn_imputer&#39;, KNNImputer()), (&#39;ridge&#39;, Ridge())])}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, a grid search is performed for each pipeline to find the optimal hyperparameters for each model. The performance of each pipeline is then evaluated using the validation set, and the results are compared using multiple evaluation metrics, including R-squared, Mean Squared Error (MSE), and Mean Absolute Error (MAE).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;results/summary.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Valid Errors</th>
+      <th>MSE</th>
+      <th>MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>simple_imputer+rf</td>
+      <td>0.748426</td>
+      <td>3500.114743</td>
+      <td>41.321086</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>simple_imputer+lasso</td>
+      <td>0.578790</td>
+      <td>6102.000292</td>
+      <td>57.295679</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>simple_imputer+ridge</td>
+      <td>0.578681</td>
+      <td>5051.988150</td>
+      <td>52.254937</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>knn_imputer+rf</td>
+      <td>0.749541</td>
+      <td>3500.114743</td>
+      <td>41.321086</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>knn_imputer+lasso</td>
+      <td>0.578790</td>
+      <td>6102.000292</td>
+      <td>57.295679</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>knn_imputer+ridge</td>
+      <td>0.578681</td>
+      <td>5051.988150</td>
+      <td>52.254937</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In this project, various machine learning models were built and evaluated to find the best model for making predictions. The combination of KNN imputer and Random Forest Regressor (knn_imputer+rf) yielded the best performance among the tested models. The evaluation metrics, such as R-squared, Mean Squared Error (MSE), and Mean Absolute Error (MAE), were calculated for the test data. The results indicated that the chosen model provided a good balance between accuracy and interpretability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;results/results_df.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>R-squared</th>
+      <th>MSE</th>
+      <th>MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>knn_imputer+rf</td>
+      <td>0.74413</td>
+      <td>2966.950719</td>
+      <td>37.245278</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The feature importance analysis further revealed the significant features that contributed the most to the model’s predictions. This information can be utilized to gain valuable insights into the underlying patterns in the data and to guide future decision-making. Overall, the chosen model serves as a reliable tool for making predictions and understanding the relationships between the features and the target variable in the given dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;figures/feature_importance_plot.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d295477a7a425ff943d702305ac05d8fdc5f488270f389c450e34758cab11c35.png" src="_images/d295477a7a425ff943d702305ac05d8fdc5f488270f389c450e34758cab11c35.png" />
+</div>
+</div>
 </section>
 </section>
 <div class="toctree-wrapper compound">
@@ -724,16 +886,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "amef"
         },
         kernelOptions: {
-            name: "python3",
+            name: "amef",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'amef'</script>
 
                 </article>
               
@@ -778,6 +940,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-building-and-evaluation">Model Building and Evaluation</a></li>
 </ul>
 </li>
 </ul>

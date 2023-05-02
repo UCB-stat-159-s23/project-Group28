@@ -354,6 +354,22 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">utils.pipeline_utils</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">pipeline_utils</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">utils.pipeline_utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_pipelines</span><span class="p">,</span> 
+    <span class="n">create_summary</span><span class="p">,</span>
+    <span class="n">calculate_metrics</span><span class="p">,</span> 
+    <span class="n">display_results</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/filtered_data.csv&#39;</span><span class="p">)</span>
 <span class="n">filtered_data</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
@@ -392,7 +408,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.10/site-packages/sklearn/preprocessing/_encoders.py:808: FutureWarning: `sparse` was renamed to `sparse_output` in version 1.2 and will be removed in 1.4. `sparse_output` is ignored unless you leave `sparse` to its default value.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/amef/lib/python3.10/site-packages/sklearn/preprocessing/_encoders.py:868: FutureWarning: `sparse` was renamed to `sparse_output` in version 1.2 and will be removed in 1.4. `sparse_output` is ignored unless you leave `sparse` to its default value.
   warnings.warn(
 </pre></div>
 </div>
@@ -408,7 +424,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((24846, 26), (24846,), (6212, 26), (6212,), (7765, 26), (7765,))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((25248, 26), (25248,), (6312, 26), (6312,), (7891, 26), (7891,))
 </pre></div>
 </div>
 </div>
@@ -416,21 +432,7 @@ document.write(`
 <p>We defined two imputers, SimpleImputer and KNNImputer, and three models, RandomForestRegressor, Lasso, and Ridge. This resulted in a total of six combinations of imputers and models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imputers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;simple_imputer&quot;</span><span class="p">:</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;most_frequent&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;knn_imputer&quot;</span><span class="p">:</span> <span class="n">KNNImputer</span><span class="p">()</span>
-<span class="p">}</span>
-<span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;rf&quot;</span><span class="p">:</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
-    <span class="s2">&quot;lasso&quot;</span><span class="p">:</span> <span class="n">Lasso</span><span class="p">(),</span>
-    <span class="s2">&quot;ridge&quot;</span><span class="p">:</span> <span class="n">Ridge</span><span class="p">()</span>
-<span class="p">}</span>
-<span class="n">pipes</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">imputer_name</span><span class="p">,</span> <span class="n">imputer</span> <span class="ow">in</span> <span class="n">imputers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="n">imputer_name</span><span class="p">,</span> <span class="n">imputer</span><span class="p">),</span> <span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">model</span><span class="p">)])</span>
-        <span class="n">pipe_name</span> <span class="o">=</span> <span class="n">imputer_name</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="n">model_name</span>
-        <span class="n">pipes</span><span class="p">[</span><span class="n">pipe_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipes</span> <span class="o">=</span> <span class="n">create_pipelines</span><span class="p">()</span>
 <span class="n">pipes</span>
 </pre></div>
 </div>
@@ -493,56 +495,143 @@ document.write(`
 <p>We calculated the mean squared error (MSE) and mean absolute error (MAE) for each pipeline to evaluate their performance on the validation set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">valid_errs</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Valid Errors&quot;</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
-<span class="n">MSE</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">ypred_valid</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">ypred_valid</span><span class="p">]</span>
-<span class="n">MAE</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">ypred_valid</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">ypred_valid</span><span class="p">]</span>
-<span class="n">summary</span><span class="p">[</span><span class="s2">&quot;MSE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE</span>
-<span class="n">summary</span><span class="p">[</span><span class="s2">&quot;MAE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAE</span>
-
-<span class="c1"># Show the summary</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">create_summary</span><span class="p">(</span><span class="n">valid_errs</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="n">ypred_valid</span><span class="p">)</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;results/summary.csv&#39;</span><span class="p">)</span>
+<span class="n">summary</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                      Valid Errors          MSE        MAE
-simple_imputer+rf         0.740761  2959.072271  39.811838
-simple_imputer+lasso      0.577548  5089.795800  53.763891
-simple_imputer+ridge      0.577711  4135.279585  48.883405
-knn_imputer+rf            0.739455  2959.072271  39.811838
-knn_imputer+lasso         0.577548  5089.795800  53.763891
-knn_imputer+ridge         0.577711  4135.279585  48.883405
-</pre></div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Valid Errors</th>
+      <th>MSE</th>
+      <th>MAE</th>
+    </tr>
+    <tr>
+      <th>Model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>simple_imputer+rf</th>
+      <td>0.748426</td>
+      <td>3500.114743</td>
+      <td>41.321086</td>
+    </tr>
+    <tr>
+      <th>simple_imputer+lasso</th>
+      <td>0.578790</td>
+      <td>6102.000292</td>
+      <td>57.295679</td>
+    </tr>
+    <tr>
+      <th>simple_imputer+ridge</th>
+      <td>0.578681</td>
+      <td>5051.988150</td>
+      <td>52.254937</td>
+    </tr>
+    <tr>
+      <th>knn_imputer+rf</th>
+      <td>0.749541</td>
+      <td>3500.114743</td>
+      <td>41.321086</td>
+    </tr>
+    <tr>
+      <th>knn_imputer+lasso</th>
+      <td>0.578790</td>
+      <td>6102.000292</td>
+      <td>57.295679</td>
+    </tr>
+    <tr>
+      <th>knn_imputer+ridge</th>
+      <td>0.578681</td>
+      <td>5051.988150</td>
+      <td>52.254937</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-</div>
-</div>
-<p>Based on the results, the best model seems to be simple_imputer+rf with the highest validation score (0.740893). We will use this model to make predictions on the test data and evaluate its performance using MSE and MAE.</p>
+<p>Based on the results, the best model seems to be knn_imputer+rf	 with the highest validation score (0.749541). We will use this model to make predictions on the test data and evaluate its performance using MSE and MAE.</p>
 <section id="test-data">
 <h2>Test data<a class="headerlink" href="#test-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model_name</span> <span class="o">=</span> <span class="s1">&#39;simple_imputer+rf&#39;</span>
-<span class="n">best_model</span> <span class="o">=</span> <span class="n">tuned_pipelines</span><span class="p">[</span><span class="n">best_model_name</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model</span> <span class="o">=</span> <span class="n">tuned_pipelines</span><span class="p">[</span><span class="s1">&#39;knn_imputer+rf&#39;</span><span class="p">]</span>
 
 <span class="c1"># Make predictions on the test data</span>
 <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-<span class="c1"># Calculate MSE and MAE for the test data</span>
-<span class="n">test_mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
-<span class="n">test_mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+<span class="c1"># Calculate evaluation metrics for test data</span>
+<span class="n">test_mse</span><span class="p">,</span> <span class="n">test_mae</span><span class="p">,</span> <span class="n">test_r2</span> <span class="o">=</span> <span class="n">calculate_metrics</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
 
-<span class="c1"># Print the results</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test MSE for </span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">test_mse</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test MAE for </span><span class="si">{</span><span class="n">best_model_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">test_mae</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Display the results in a table format</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">display_results</span><span class="p">(</span><span class="n">test_mse</span><span class="p">,</span> <span class="n">test_mae</span><span class="p">,</span> <span class="n">test_r2</span><span class="p">)</span>
+<span class="n">results_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;results/results_df.csv&#39;</span><span class="p">)</span>
+<span class="n">results_df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for simple_imputer+rf: 2671.9760087718178
-Test MAE for simple_imputer+rf: 35.80202521655956
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R-squared</th>
+      <th>MSE</th>
+      <th>MAE</th>
+    </tr>
+    <tr>
+      <th>Model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>knn_imputer+rf</th>
+      <td>0.74413</td>
+      <td>2966.950719</td>
+      <td>37.245278</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -572,7 +661,7 @@ Test MAE for simple_imputer+rf: 35.80202521655956
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ef4efcaa5ab2e94b44c5a9fea069d7d23b453b8cd4a329bae273177ca52eff5c.png" src="_images/ef4efcaa5ab2e94b44c5a9fea069d7d23b453b8cd4a329bae273177ca52eff5c.png" />
+<img alt="_images/d295477a7a425ff943d702305ac05d8fdc5f488270f389c450e34758cab11c35.png" src="_images/d295477a7a425ff943d702305ac05d8fdc5f488270f389c450e34758cab11c35.png" />
 </div>
 </div>
 </section>
@@ -587,16 +676,16 @@ Test MAE for simple_imputer+rf: 35.80202521655956
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "amef"
         },
         kernelOptions: {
-            name: "python3",
+            name: "amef",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'amef'</script>
 
                 </article>
               
