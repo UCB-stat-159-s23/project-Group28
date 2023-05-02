@@ -3,5 +3,5 @@ root: main
 parts:
 - caption: Analysis
   chapters:
-  - file: data_clean.ipynb
-  - file: build_model.ipynb
+  - file: data_cleaning.ipynb
+  - file: model_building.ipynb
