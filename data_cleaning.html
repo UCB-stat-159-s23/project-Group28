@@ -152,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="README.html">
-                    Project Group 28: Airbnb Europe Dataset Analysis
+                    Airbnb Europe Dataset Analysis
                 </a>
             </li>
         </ul>
@@ -298,7 +298,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -314,6 +316,20 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-nas">Check NAs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-the-outliers">Remove the outliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-correlation-matrix">Visualize the correlation matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-for-comparing-room-types">Boxplot for comparing room types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-by-room-type">Filter data by room type</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-relationship-between-city-and-price">Visualize the relationship between city and price</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-through-the-x-variables-and-create-a-separate-plot-for-each">Loop through the x variables and create a separate plot for each</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -615,6 +631,8 @@ document.write(`
 </table>
 </div></div></div>
 </div>
+<section id="check-nas">
+<h2>Check NAs<a class="headerlink" href="#check-nas" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -665,6 +683,9 @@ dtype: int64
 <img alt="_images/e46313800e34ab0d8d49ca7a8c87a4eaa364d92ae4996a2048f3dfdf80701419.png" src="_images/e46313800e34ab0d8d49ca7a8c87a4eaa364d92ae4996a2048f3dfdf80701419.png" />
 </div>
 </div>
+</section>
+<section id="remove-the-outliers">
+<h2>Remove the outliers<a class="headerlink" href="#remove-the-outliers" title="Permalink to this heading">#</a></h2>
 <p>From the histogram, we can observe that there seem to be outliers in the price distribution. To address this issue, we will remove the outliers based on the Interquartile Range (IQR) method. Here’s the code to perform this operation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -695,12 +716,22 @@ Name: Price, dtype: float64
 <span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
-<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
-<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.8</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.8</span> <span class="o">*</span> <span class="n">IQR</span>
 
 <span class="c1"># Filter out the outliers</span>
 <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper_bound</span><span class="p">)]</span>
 <span class="n">filtered_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/filtered_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filtered_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(39365, 19)
+-132.02700727067884
+573.4164505330268
 </pre></div>
 </div>
 </div>
@@ -719,9 +750,12 @@ Name: Price, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/39f5627e5d02cfec3d18387c63118ca05d974aa7d50eb4e329420a0e04ef54b7.png" src="_images/39f5627e5d02cfec3d18387c63118ca05d974aa7d50eb4e329420a0e04ef54b7.png" />
+<img alt="_images/64b1837422812a3ce3b0fe578bce6827b6b03f88fe2c1de195ae9ad7b37b88ba.png" src="_images/64b1837422812a3ce3b0fe578bce6827b6b03f88fe2c1de195ae9ad7b37b88ba.png" />
 </div>
 </div>
+</section>
+<section id="visualize-the-correlation-matrix">
+<h2>Visualize the correlation matrix<a class="headerlink" href="#visualize-the-correlation-matrix" title="Permalink to this heading">#</a></h2>
 <p>With the outliers removed, our dataset is now ready for further analysis and model building.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -746,17 +780,19 @@ Name: Price, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3674/1166516350.py:2: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_24209/1166516350.py:2: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
   corr_matrix = filtered_data.corr()
 </pre></div>
 </div>
-<img alt="_images/7092ba938a124031084589a9f3e1f38320547c309130fa7ad3562f95288dda03.png" src="_images/7092ba938a124031084589a9f3e1f38320547c309130fa7ad3562f95288dda03.png" />
+<img alt="_images/4ba4903780d7b52386d144931e527072b1f4db60d50c7923472d3579150adfcb.png" src="_images/4ba4903780d7b52386d144931e527072b1f4db60d50c7923472d3579150adfcb.png" />
 </div>
 </div>
+</section>
+<section id="boxplot-for-comparing-room-types">
+<h2>Boxplot for comparing room types<a class="headerlink" href="#boxplot-for-comparing-room-types" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Boxplot for comparing room types</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Room Type&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">filtered_data</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Price Comparison by Room Type&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Room Type&#39;</span><span class="p">)</span>
@@ -767,9 +803,12 @@ Name: Price, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a62113b06bf36e36a479b3a40a7b192b97902fe2bb41b967829f9afdf8566ad4.png" src="_images/a62113b06bf36e36a479b3a40a7b192b97902fe2bb41b967829f9afdf8566ad4.png" />
+<img alt="_images/91344ad484868df8bb5289fee446133d466ddcbded2e20db067d9715210082e7.png" src="_images/91344ad484868df8bb5289fee446133d466ddcbded2e20db067d9715210082e7.png" />
 </div>
 </div>
+</section>
+<section id="filter-data-by-room-type">
+<h2>Filter data by room type<a class="headerlink" href="#filter-data-by-room-type" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;Room Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -777,9 +816,9 @@ Name: Price, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entire home/apt    25728
-Private room       12781
-Shared room          314
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entire home/apt    26177
+Private room       12873
+Shared room          315
 Name: Room Type, dtype: int64
 </pre></div>
 </div>
@@ -787,8 +826,7 @@ Name: Room Type, dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter data by room type</span>
-<span class="n">entire_home</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;Room Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Entire home/apt&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">entire_home</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;Room Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Entire home/apt&#39;</span><span class="p">]</span>
 <span class="n">private_room</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;Room Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Private room&#39;</span><span class="p">]</span>
 <span class="n">shared_room</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;Room Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Shared room&#39;</span><span class="p">]</span>
 
@@ -837,7 +875,7 @@ Name: Room Type, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5359751fc4a3c9e288c5d5ecebf145dc2457877c2e1c1aff55990e99fa367e9d.png" src="_images/5359751fc4a3c9e288c5d5ecebf145dc2457877c2e1c1aff55990e99fa367e9d.png" />
+<img alt="_images/8b084f1c1b3a6f1b6dc3dcff5cf86235dd3e5deb6c9984f7d19b34ce51a05f9b.png" src="_images/8b084f1c1b3a6f1b6dc3dcff5cf86235dd3e5deb6c9984f7d19b34ce51a05f9b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -861,28 +899,30 @@ Name: Room Type, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between city and price: 0.10361768269037437
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between city and price: 0.08425094730069628
                  mean      median
 City                             
-Amsterdam  354.109178  356.197127
-Athens     144.354423  127.715417
-Barcelona  227.110980  196.895292
-Berlin     211.988194  185.566047
-Budapest   167.491323  152.277107
-Lisbon     230.253192  223.030019
-Paris      299.216175  287.305434
-Rome       197.229417  182.124237
-Vienna     221.750960  206.390389
+Amsterdam  369.803200  368.617158
+Athens     145.680222  127.715417
+Barcelona  235.001931  196.895292
+Berlin     214.763642  185.566047
+Budapest   168.058828  152.277107
+Lisbon     232.385012  223.264540
+Paris      309.631882  289.868580
+Rome       198.352167  182.124237
+Vienna     223.813612  206.624126
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="visualize-the-relationship-between-city-and-price">
+<h2>Visualize the relationship between city and price<a class="headerlink" href="#visualize-the-relationship-between-city-and-price" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the average price for each city</span>
 <span class="n">city_price</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;City&#39;</span><span class="p">)[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1"># Create a bar plot to visualize the relationship between city and price</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">city_price</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">city_price</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Average Price by City&#39;</span><span class="p">)</span>
@@ -895,9 +935,12 @@ Vienna     221.750960  206.390389
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3e8c987f61c273938e0da27a047132f101b87293fa8c75f96cd8684dbe701276.png" src="_images/3e8c987f61c273938e0da27a047132f101b87293fa8c75f96cd8684dbe701276.png" />
+<img alt="_images/b33e7a02c44427f459ec6de91a1064f8ca0201e4ee31212a263a3874d21f6db7.png" src="_images/b33e7a02c44427f459ec6de91a1064f8ca0201e4ee31212a263a3874d21f6db7.png" />
 </div>
 </div>
+</section>
+<section id="loop-through-the-x-variables-and-create-a-separate-plot-for-each">
+<h2>Loop through the x variables and create a separate plot for each<a class="headerlink" href="#loop-through-the-x-variables-and-create-a-separate-plot-for-each" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Room Type&#39;</span><span class="p">,</span>
@@ -909,7 +952,6 @@ Vienna     221.750960  206.390389
           <span class="s1">&#39;Restraunt Index&#39;</span><span class="p">,</span> <span class="s1">&#39;Normalised Restraunt Index&#39;</span><span class="p">]</span>
 <span class="n">y_var</span> <span class="o">=</span> <span class="s1">&#39;Price&#39;</span>
 
-<span class="c1"># Loop through the x variables and create a separate plot for each</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x_var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_vars</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
     <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">filtered_data</span><span class="p">[</span><span class="n">x_var</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">filtered_data</span><span class="p">[</span><span class="n">y_var</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="n">filtered_data</span><span class="p">[</span><span class="n">label</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
@@ -922,15 +964,16 @@ Vienna     221.750960  206.390389
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/19caf43baf74357ae973cd7140c9005825794dfe53b2abad608400e0a16e033e.png" src="_images/19caf43baf74357ae973cd7140c9005825794dfe53b2abad608400e0a16e033e.png" />
-<img alt="_images/29b9879abfdea588f006074af1898bcebdfdb641783158331fa4d9822e3ca05a.png" src="_images/29b9879abfdea588f006074af1898bcebdfdb641783158331fa4d9822e3ca05a.png" />
-<img alt="_images/87507c4dc28c46d72d4fe9a599d0cb1d1ee213aad36a1e30aef7195a9260741b.png" src="_images/87507c4dc28c46d72d4fe9a599d0cb1d1ee213aad36a1e30aef7195a9260741b.png" />
-<img alt="_images/26ee4f0ba849ebd7040e6f0f2470d838c43e9b19533554db60d90a00591a10c9.png" src="_images/26ee4f0ba849ebd7040e6f0f2470d838c43e9b19533554db60d90a00591a10c9.png" />
-<img alt="_images/22db4b64e5a728a787774a956c9faa71e63a4fbf514fc702e8d94634dbcd1b0b.png" src="_images/22db4b64e5a728a787774a956c9faa71e63a4fbf514fc702e8d94634dbcd1b0b.png" />
-<img alt="_images/244173cb0a6e609e678f922465a85ac948ccef1cf3d02a760fc4cd167a89c9a6.png" src="_images/244173cb0a6e609e678f922465a85ac948ccef1cf3d02a760fc4cd167a89c9a6.png" />
-<img alt="_images/50f12176361cfe11bad5817bdeb70ed07d97f6a5eae310dbeafbc75f08b7e3df.png" src="_images/50f12176361cfe11bad5817bdeb70ed07d97f6a5eae310dbeafbc75f08b7e3df.png" />
+<img alt="_images/cf6c6c9855c34b12c85d5035e05bc0b5ddbce4e78e6a4f12d31d5b0fb403aa6f.png" src="_images/cf6c6c9855c34b12c85d5035e05bc0b5ddbce4e78e6a4f12d31d5b0fb403aa6f.png" />
+<img alt="_images/22930c9033a67088ec284292395318572cb5a5679d7b99dc2d205f493b7ed5c2.png" src="_images/22930c9033a67088ec284292395318572cb5a5679d7b99dc2d205f493b7ed5c2.png" />
+<img alt="_images/fabded2103a15f505276f57eabf9da871796510575907dbc4dc6d2ed32c9779a.png" src="_images/fabded2103a15f505276f57eabf9da871796510575907dbc4dc6d2ed32c9779a.png" />
+<img alt="_images/e3d8288ee02f5fca189f35ff5754c075c3dbe0a66b9d3a2905bdcf86951847a4.png" src="_images/e3d8288ee02f5fca189f35ff5754c075c3dbe0a66b9d3a2905bdcf86951847a4.png" />
+<img alt="_images/97e52dd68d71c052ee7071643af6c5989fbfbe5b91039851e237f27ee62913b5.png" src="_images/97e52dd68d71c052ee7071643af6c5989fbfbe5b91039851e237f27ee62913b5.png" />
+<img alt="_images/801366e9e045e72bb1056f72ca3f96297df4ea92c2bb9ca94692efd5f81bbf4d.png" src="_images/801366e9e045e72bb1056f72ca3f96297df4ea92c2bb9ca94692efd5f81bbf4d.png" />
+<img alt="_images/370cb38c87bb89fa30ba8b261b6f23a95ff7a3605d1859c9d80d19fac0993250.png" src="_images/370cb38c87bb89fa30ba8b261b6f23a95ff7a3605d1859c9d80d19fac0993250.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -942,16 +985,16 @@ Vienna     221.750960  206.390389
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "aemf"
+            mode: "python"
         },
         kernelOptions: {
-            name: "aemf",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'aemf'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -991,6 +1034,26 @@ Vienna     221.750960  206.390389
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-nas">Check NAs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-the-outliers">Remove the outliers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-correlation-matrix">Visualize the correlation matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-for-comparing-room-types">Boxplot for comparing room types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-by-room-type">Filter data by room type</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-relationship-between-city-and-price">Visualize the relationship between city and price</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-through-the-x-variables-and-create-a-separate-plot-for-each">Loop through the x variables and create a separate plot for each</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

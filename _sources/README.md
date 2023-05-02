@@ -1,4 +1,4 @@
-# Project Group 28: Airbnb Europe Dataset Analysis
+# Airbnb Europe Dataset Analysis
 
 This project aims to analyze the Airbnb Europe dataset, which is available on [Kaggle](https://www.kaggle.com/datasets/dipeshkhemani/airbnb-cleaned-europe-dataset?resource=download). We explore various data cleaning, preprocessing, and modeling techniques to extract insights from the dataset and make predictions.
 
@@ -22,15 +22,15 @@ The repository is structured as follows:
 ## Setup and Installation
 
 1. Clone this repository:
-	git clone https://github.com/UCB-stat-159-s23/project-Group28.git
-	cd project-Group28
+	`git clone https://github.com/UCB-stat-159-s23/project-Group28.git`
+	`cd project-Group28`
 	
 2. Create and activate the aemf environment:
-	mamba env create -f environment.yml --name aemf
-	conda activate aemf
+	`mamba env create -f environment.yml --name aemf`
+	`conda activate aemf`
 	
 3. Install the IPython kernel with the aemf environment:
-	python -m ipykernel install --user --name aemf --display-name "IPython - aemf"
+	`python -m ipykernel install --user --name aemf --display-name "IPython - aemf"`
 
 ## Usage
 

@@ -151,7 +151,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="README.html">
-                    Project Group 28: Airbnb Europe Dataset Analysis
+                    Airbnb Europe Dataset Analysis
                 </a>
             </li>
         </ul>
@@ -320,12 +320,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-for-categorical-features">One-hot encoding for categorical features</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data">Split the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-and-fit-data">Create pipelines and fit data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-best-estimator">Find the best estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-for-categorical-features">One-hot encoding for categorical features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data">Split the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-and-fit-data">Create pipelines and fit data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-use-the-best-estimator">Test data use the best estimator</a></li>
 </ul>
             </nav>
@@ -340,8 +343,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="model-building-and-evaluation">
 <h1>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this heading">#</a></h1>
+<section id="find-the-best-estimator">
+<h2>Find the best estimator<a class="headerlink" href="#find-the-best-estimator" title="Permalink to this heading">#</a></h2>
 <section id="import-the-packages">
-<h2>Import the packages<a class="headerlink" href="#import-the-packages" title="Permalink to this heading">#</a></h2>
+<h3>Import the packages<a class="headerlink" href="#import-the-packages" title="Permalink to this heading">#</a></h3>
+<p>In this section, we’ll build and evaluate different models to predict the Airbnb prices using the preprocessed dataset. We’ll compare the performance of various regression algorithms, such as RandomForest, Lasso, and Ridge, combined with different imputers like SimpleImputer and KNNImputer.</p>
+<p>First, let’s import the necessary libraries and define some utility functions to streamline the process:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -378,7 +385,7 @@ document.write(`
 </div>
 </section>
 <section id="load-the-data">
-<h2>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this heading">#</a></h2>
+<h3>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/filtered_data.csv&#39;</span><span class="p">)</span>
@@ -400,7 +407,7 @@ document.write(`
 </div>
 </section>
 <section id="one-hot-encoding-for-categorical-features">
-<h2>One-hot encoding for categorical features<a class="headerlink" href="#one-hot-encoding-for-categorical-features" title="Permalink to this heading">#</a></h2>
+<h3>One-hot encoding for categorical features<a class="headerlink" href="#one-hot-encoding-for-categorical-features" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Room Type&#39;</span><span class="p">]</span>
@@ -421,7 +428,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/aemf/lib/python3.10/site-packages/sklearn/preprocessing/_encoders.py:868: FutureWarning: `sparse` was renamed to `sparse_output` in version 1.2 and will be removed in 1.4. `sparse_output` is ignored unless you leave `sparse` to its default value.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.10/site-packages/sklearn/preprocessing/_encoders.py:808: FutureWarning: `sparse` was renamed to `sparse_output` in version 1.2 and will be removed in 1.4. `sparse_output` is ignored unless you leave `sparse` to its default value.
   warnings.warn(
 </pre></div>
 </div>
@@ -429,7 +436,7 @@ document.write(`
 </div>
 </section>
 <section id="split-the-data">
-<h2>Split the data<a class="headerlink" href="#split-the-data" title="Permalink to this heading">#</a></h2>
+<h3>Split the data<a class="headerlink" href="#split-the-data" title="Permalink to this heading">#</a></h3>
 <p>We split the data into training, validation, and test sets, with 80% of the data for training and 20% for testing. We further split the training data into an 80-20 split for training and validation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -440,14 +447,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((25248, 26), (25248,), (6312, 26), (6312,), (7891, 26), (7891,))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((25193, 26), (25193,), (6299, 26), (6299,), (7873, 26), (7873,))
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="create-pipelines-and-fit-data">
-<h2>Create pipelines and fit data<a class="headerlink" href="#create-pipelines-and-fit-data" title="Permalink to this heading">#</a></h2>
+<h3>Create pipelines and fit data<a class="headerlink" href="#create-pipelines-and-fit-data" title="Permalink to this heading">#</a></h3>
 <p>We defined two imputers, SimpleImputer and KNNImputer, and three models, RandomForestRegressor, Lasso, and Ridge. This resulted in a total of six combinations of imputers and models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -514,7 +521,7 @@ document.write(`
 <p>We calculated the mean squared error (MSE) and mean absolute error (MAE) for each pipeline to evaluate their performance on the validation set.</p>
 </section>
 <section id="results">
-<h2>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h2>
+<h3>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">create_summary</span><span class="p">(</span><span class="n">valid_errs</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="n">ypred_valid</span><span class="p">)</span>
@@ -556,45 +563,46 @@ document.write(`
   <tbody>
     <tr>
       <th>simple_imputer+rf</th>
-      <td>0.748703</td>
-      <td>3510.601182</td>
-      <td>41.370089</td>
+      <td>0.741314</td>
+      <td>3423.600482</td>
+      <td>41.317972</td>
     </tr>
     <tr>
       <th>simple_imputer+lasso</th>
-      <td>0.578790</td>
-      <td>6102.000292</td>
-      <td>57.295679</td>
+      <td>0.574950</td>
+      <td>5854.422403</td>
+      <td>56.484180</td>
     </tr>
     <tr>
       <th>simple_imputer+ridge</th>
-      <td>0.578681</td>
-      <td>5051.988150</td>
-      <td>52.254937</td>
+      <td>0.574950</td>
+      <td>4861.623952</td>
+      <td>51.632038</td>
     </tr>
     <tr>
       <th>knn_imputer+rf</th>
-      <td>0.748937</td>
-      <td>3510.601182</td>
-      <td>41.370089</td>
+      <td>0.742253</td>
+      <td>3423.600482</td>
+      <td>41.317972</td>
     </tr>
     <tr>
       <th>knn_imputer+lasso</th>
-      <td>0.578790</td>
-      <td>6102.000292</td>
-      <td>57.295679</td>
+      <td>0.574950</td>
+      <td>5854.422403</td>
+      <td>56.484180</td>
     </tr>
     <tr>
       <th>knn_imputer+ridge</th>
-      <td>0.578681</td>
-      <td>5051.988150</td>
-      <td>52.254937</td>
+      <td>0.574950</td>
+      <td>4861.623952</td>
+      <td>51.632038</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>Based on the results, the best model seems to be knn_imputer+rf	 with the highest validation score (0.749541). We will use this model to make predictions on the test data and evaluate its performance using MSE and MAE.</p>
+<p>Based on the results, the best model seems to be knn_imputer+rf	 with the highest validation score. We will use this model to make predictions on the test data and evaluate its performance using MSE and MAE.</p>
+</section>
 </section>
 <section id="test-data-use-the-best-estimator">
 <h2>Test data use the best estimator<a class="headerlink" href="#test-data-use-the-best-estimator" title="Permalink to this heading">#</a></h2>
@@ -648,9 +656,9 @@ document.write(`
   <tbody>
     <tr>
       <th>knn_imputer+rf</th>
-      <td>0.741165</td>
-      <td>3001.33257</td>
-      <td>37.435389</td>
+      <td>0.744491</td>
+      <td>2880.713519</td>
+      <td>36.672181</td>
     </tr>
   </tbody>
 </table>
@@ -684,7 +692,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/606080f8690180529819a1b2a89a2217eb7ec9ca6305e36b200d426931eabdda.png" src="_images/606080f8690180529819a1b2a89a2217eb7ec9ca6305e36b200d426931eabdda.png" />
+<img alt="_images/6b3b7b760caa76bc7dc3842689d9764b5d515cbbc88d4a05e9b64758a65cffcd.png" src="_images/6b3b7b760caa76bc7dc3842689d9764b5d515cbbc88d4a05e9b64758a65cffcd.png" />
 </div>
 </div>
 </section>
@@ -699,16 +707,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "aemf"
+            mode: "python"
         },
         kernelOptions: {
-            name: "aemf",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'aemf'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -748,12 +756,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-for-categorical-features">One-hot encoding for categorical features</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data">Split the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-and-fit-data">Create pipelines and fit data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-best-estimator">Find the best estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-for-categorical-features">One-hot encoding for categorical features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data">Split the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-and-fit-data">Create pipelines and fit data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-use-the-best-estimator">Test data use the best estimator</a></li>
 </ul>
   </nav></div>

@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Data Preprocessing" href="data_cleaning.html" />
-    <link rel="prev" title="Project Group 28: Airbnb Europe Dataset Analysis" href="README.html" />
+    <link rel="prev" title="Airbnb Europe Dataset Analysis" href="README.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -152,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="README.html">
-                    Project Group 28: Airbnb Europe Dataset Analysis
+                    Airbnb Europe Dataset Analysis
                 </a>
             </li>
         </ul>
@@ -322,7 +322,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">Data Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">Data Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
@@ -344,15 +348,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="a-comprehensive-analysis-using-machine-learning-techniques">
 <h1>A Comprehensive Analysis Using Machine Learning Techniques<a class="headerlink" href="#a-comprehensive-analysis-using-machine-learning-techniques" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">utils.pipeline_utils</span> <span class="kn">import</span> <span class="n">create_pipelines</span>
-</pre></div>
-</div>
-</div>
-</div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>In this Jupyter Book, we will dive into the world of Airbnb price prediction in Europe. Airbnb has become a popular platform for travelers to find accommodation, offering a wide range of options in various cities across Europe. Understanding the factors that influence pricing is essential for hosts who want to optimize their listings, as well as for guests who want to find the best deals.</p>
@@ -383,6 +378,21 @@ document.write(`
 <li><p>Normalised Restaurant Index</p></li>
 </ul>
 <p>Here’s a preview of the dataset:</p>
+<section id="import-the-packages">
+<h3>Import the packages<a class="headerlink" href="#import-the-packages" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">utils.pipeline_utils</span> <span class="kn">import</span> <span class="n">create_pipelines</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-the-data">
+<h3>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/Aemf1.csv&#39;</span><span class="p">)</span>
@@ -546,6 +556,7 @@ document.write(`
 </div></div></div>
 </div>
 </section>
+</section>
 <section id="exploratory-data-analysis">
 <h2>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this heading">#</a></h2>
 <section id="data-preprocessing">
@@ -560,7 +571,16 @@ document.write(`
 <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
 
 <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper_bound</span><span class="p">)]</span>
-<span class="n">filtered_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/filtered_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filtered_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(38823, 19)
+-86.01982524000235
+527.4092685023504
 </pre></div>
 </div>
 </div>
@@ -579,7 +599,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7092ba938a124031084589a9f3e1f38320547c309130fa7ad3562f95288dda03.png" src="_images/7092ba938a124031084589a9f3e1f38320547c309130fa7ad3562f95288dda03.png" />
+<img alt="_images/4ba4903780d7b52386d144931e527072b1f4db60d50c7923472d3579150adfcb.png" src="_images/4ba4903780d7b52386d144931e527072b1f4db60d50c7923472d3579150adfcb.png" />
 </div>
 </div>
 <ol class="arabic simple" start="2">
@@ -592,7 +612,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a62113b06bf36e36a479b3a40a7b192b97902fe2bb41b967829f9afdf8566ad4.png" src="_images/a62113b06bf36e36a479b3a40a7b192b97902fe2bb41b967829f9afdf8566ad4.png" />
+<img alt="_images/91344ad484868df8bb5289fee446133d466ddcbded2e20db067d9715210082e7.png" src="_images/91344ad484868df8bb5289fee446133d466ddcbded2e20db067d9715210082e7.png" />
 </div>
 </div>
 <ol class="arabic simple" start="3">
@@ -605,7 +625,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/208090c180076783107399da43a582ef7f6c6bfcc6e9fdbe47f644f52d966b03.png" src="_images/208090c180076783107399da43a582ef7f6c6bfcc6e9fdbe47f644f52d966b03.png" />
+<img alt="_images/d36075977120ca04114080a5810da9df1132975eae2d099cba1f02ae34011515.png" src="_images/d36075977120ca04114080a5810da9df1132975eae2d099cba1f02ae34011515.png" />
 </div>
 </div>
 <ol class="arabic simple" start="4">
@@ -645,56 +665,56 @@ document.write(`
     <tr>
       <th>0</th>
       <td>Amsterdam</td>
-      <td>354.109178</td>
-      <td>356.197127</td>
+      <td>369.803200</td>
+      <td>368.617158</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Athens</td>
-      <td>144.354423</td>
+      <td>145.680222</td>
       <td>127.715417</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Barcelona</td>
-      <td>227.110980</td>
+      <td>235.001931</td>
       <td>196.895292</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Berlin</td>
-      <td>211.988194</td>
+      <td>214.763642</td>
       <td>185.566047</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Budapest</td>
-      <td>167.491323</td>
+      <td>168.058828</td>
       <td>152.277107</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Lisbon</td>
-      <td>230.253192</td>
-      <td>223.030019</td>
+      <td>232.385012</td>
+      <td>223.264540</td>
     </tr>
     <tr>
       <th>6</th>
       <td>Paris</td>
-      <td>299.216175</td>
-      <td>287.305434</td>
+      <td>309.631882</td>
+      <td>289.868580</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Rome</td>
-      <td>197.229417</td>
+      <td>198.352167</td>
       <td>182.124237</td>
     </tr>
     <tr>
       <th>8</th>
       <td>Vienna</td>
-      <td>221.750960</td>
-      <td>206.390389</td>
+      <td>223.813612</td>
+      <td>206.624126</td>
     </tr>
   </tbody>
 </table>
@@ -710,7 +730,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3e8c987f61c273938e0da27a047132f101b87293fa8c75f96cd8684dbe701276.png" src="_images/3e8c987f61c273938e0da27a047132f101b87293fa8c75f96cd8684dbe701276.png" />
+<img alt="_images/b33e7a02c44427f459ec6de91a1064f8ca0201e4ee31212a263a3874d21f6db7.png" src="_images/b33e7a02c44427f459ec6de91a1064f8ca0201e4ee31212a263a3874d21f6db7.png" />
 </div>
 </div>
 </section>
@@ -718,6 +738,10 @@ document.write(`
 <h3>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this heading">#</a></h3>
 <p>In the Model Building and Evaluation section, various machine learning models are built to predict the price of Airbnb listings. The primary objective is to identify the most effective model for this purpose.</p>
 <p>To achieve this, the dataset is first split into training, validation, and testing sets. The training set is used to train the models, the validation set helps tune hyperparameters, and the testing set is employed to evaluate the final model’s performance.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">331</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>The chosen models for this project are Random Forest, Lasso Regression, and Ridge Regression. These models are combined with different imputation methods (Simple Imputer and K-Nearest Neighbors Imputer) to handle any missing values in the data. A total of six combinations are created by pairing each model with an imputation method, and each combination is represented as a pipeline.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -740,7 +764,46 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Next, a grid search is performed for each pipeline to find the optimal hyperparameters for each model. The performance of each pipeline is then evaluated using the validation set, and the results are compared using multiple evaluation metrics, including R-squared, Mean Squared Error (MSE), and Mean Absolute Error (MAE).</p>
+<p>Next, we perform an extensive grid search for each pipeline to identify the optimal hyperparameters for each model. The grid search process involves exhaustively trying different combinations of hyperparameters and selecting the combination that yields the best performance. This step is crucial for optimizing the performance of our models, as selecting the appropriate hyperparameters can significantly impact the prediction accuracy and generalization capabilities.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">for</span> <span class="n">pipe_name</span><span class="p">,</span> <span class="n">pipe</span> <span class="ow">in</span> <span class="n">pipes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+    <span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cv_param_grid_all</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="s2">&quot;rf__min_samples_leaf&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    
+    <span class="s2">&quot;lasso__alpha&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    
+    <span class="s2">&quot;knn_imputer__n_neighbors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    
+    <span class="s2">&quot;ridge__alpha&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Once the grid search is completed, and the optimal hyperparameters for each model have been identified, we proceed to evaluate the performance of each pipeline using the validation set. During this step, we make predictions on the validation set and compare these predictions with the actual target values to assess the model’s accuracy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">valid_errs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">tuned_pipelines</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">ypred_valid</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">pipe_name</span><span class="p">,</span> <span class="n">pipe</span> <span class="ow">in</span> <span class="n">pipes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">cv_param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">cv_param_grid_all</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cv_param_grid_all</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">pipe</span><span class="o">.</span><span class="n">named_steps</span><span class="o">.</span><span class="n">keys</span><span class="p">()))}</span>
+    <span class="n">pipe_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">cv_param_grid</span><span class="p">)</span>
+    <span class="n">pipe_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">valid_errs</span><span class="p">[</span><span class="n">pipe_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe_search</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)</span>
+    <span class="n">tuned_pipelines</span><span class="p">[</span><span class="n">pipe_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">pipe_search</span><span class="p">)</span>
+    <span class="n">ypred_valid</span><span class="p">[</span><span class="n">pipe_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To ensure a comprehensive evaluation, we utilize multiple evaluation metrics, including R-squared, Mean Squared Error (MSE), and Mean Absolute Error (MAE). Each of these metrics provides valuable insights into the performance of the models:</p>
+<ul class="simple">
+<li><p>R-squared: This metric represents the proportion of the variance in the dependent variable (Price) that can be explained by the independent variables (features) in the model. A higher R-squared value indicates a better fit of the model to the data.</p></li>
+<li><p>Mean Squared Error (MSE): This metric calculates the average squared difference between the predicted values and the actual values. Lower MSE values indicate better model performance, as the predicted values are closer to the actual values.</p></li>
+<li><p>Mean Absolute Error (MAE): This metric calculates the average absolute difference between the predicted values and the actual values. Lower MAE values indicate better model performance, as the predicted values are closer to the actual values.</p></li>
+</ul>
+<p>By comparing the results of each pipeline using these evaluation metrics, we can identify the best-performing models and gain valuable insights into their strengths and weaknesses. This comprehensive evaluation allows us to choose the most suitable model for our specific problem and make more accurate predictions on new, unseen</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;results/summary.csv&#39;</span><span class="p">)</span>
@@ -776,44 +839,44 @@ document.write(`
     <tr>
       <th>0</th>
       <td>simple_imputer+rf</td>
-      <td>0.748426</td>
-      <td>3500.114743</td>
-      <td>41.321086</td>
+      <td>0.741314</td>
+      <td>3423.600482</td>
+      <td>41.317972</td>
     </tr>
     <tr>
       <th>1</th>
       <td>simple_imputer+lasso</td>
-      <td>0.578790</td>
-      <td>6102.000292</td>
-      <td>57.295679</td>
+      <td>0.574950</td>
+      <td>5854.422403</td>
+      <td>56.484180</td>
     </tr>
     <tr>
       <th>2</th>
       <td>simple_imputer+ridge</td>
-      <td>0.578681</td>
-      <td>5051.988150</td>
-      <td>52.254937</td>
+      <td>0.574950</td>
+      <td>4861.623952</td>
+      <td>51.632038</td>
     </tr>
     <tr>
       <th>3</th>
       <td>knn_imputer+rf</td>
-      <td>0.749541</td>
-      <td>3500.114743</td>
-      <td>41.321086</td>
+      <td>0.742253</td>
+      <td>3423.600482</td>
+      <td>41.317972</td>
     </tr>
     <tr>
       <th>4</th>
       <td>knn_imputer+lasso</td>
-      <td>0.578790</td>
-      <td>6102.000292</td>
-      <td>57.295679</td>
+      <td>0.574950</td>
+      <td>5854.422403</td>
+      <td>56.484180</td>
     </tr>
     <tr>
       <th>5</th>
       <td>knn_imputer+ridge</td>
-      <td>0.578681</td>
-      <td>5051.988150</td>
-      <td>52.254937</td>
+      <td>0.574950</td>
+      <td>4861.623952</td>
+      <td>51.632038</td>
     </tr>
   </tbody>
 </table>
@@ -858,9 +921,9 @@ document.write(`
     <tr>
       <th>0</th>
       <td>knn_imputer+rf</td>
-      <td>0.74413</td>
-      <td>2966.950719</td>
-      <td>37.245278</td>
+      <td>0.744491</td>
+      <td>2880.713519</td>
+      <td>36.672181</td>
     </tr>
   </tbody>
 </table>
@@ -874,7 +937,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d295477a7a425ff943d702305ac05d8fdc5f488270f389c450e34758cab11c35.png" src="_images/d295477a7a425ff943d702305ac05d8fdc5f488270f389c450e34758cab11c35.png" />
+<img alt="_images/6b3b7b760caa76bc7dc3842689d9764b5d515cbbc88d4a05e9b64758a65cffcd.png" src="_images/6b3b7b760caa76bc7dc3842689d9764b5d515cbbc88d4a05e9b64758a65cffcd.png" />
 </div>
 </div>
 </section>
@@ -898,16 +961,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "aemf"
+            mode: "python"
         },
         kernelOptions: {
-            name: "aemf",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'aemf'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -926,7 +989,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Project Group 28: Airbnb Europe Dataset Analysis</p>
+        <p class="prev-next-title">Airbnb Europe Dataset Analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -957,7 +1020,11 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">Data Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">Data Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
