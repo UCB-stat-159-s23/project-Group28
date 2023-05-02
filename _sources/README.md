@@ -30,19 +30,19 @@ The repository is structured as follows:
 
 ## Setup and Installation
 
-1. Clone this repository:
+1. Clone this repository, run:
 
-	`git clone https://github.com/UCB-stat-159-s23/project-Group28.git`
-	`cd project-Group28`
+	git clone https://github.com/UCB-stat-159-s23/project-Group28.git
+	cd project-Group28
 	
-2. Create and activate the aemf environment:
+2. Create and activate the aemf environment, run:
 
-	`mamba env create -f environment.yml --name aemf`
-	`conda activate aemf`
+	mamba env create -f environment.yml --name aemf
+	conda activate aemf
 	
-3. Install the IPython kernel with the aemf environment:
+3. Install the IPython kernel with the aemf environment, run:
 
-	`python -m ipykernel install --user --name aemf --display-name "IPython - aemf"`
+	python -m ipykernel install --user --name aemf --display-name "IPython - aemf"
 
 ## Usage
 
