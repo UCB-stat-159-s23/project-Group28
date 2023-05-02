@@ -44,6 +44,7 @@ conda activate aemf
 ```python
 python -m ipykernel install --user --name aemf --display-name "IPython - aemf"
 ```
+
 ## Usage
 
 To build the JupyterBook website locally, run:
