@@ -31,19 +31,19 @@ The repository is structured as follows:
 ## Setup and Installation
 
 1. Clone this repository:
-
-	`git clone https://github.com/UCB-stat-159-s23/project-Group28.git`
-	`cd project-Group28`
-	
+```python
+git clone https://github.com/UCB-stat-159-s23/project-Group28.git
+cd project-Group28
+```
 2. Create and activate the aemf environment:
-
-	`mamba env create -f environment.yml --name aemf`
-	`conda activate aemf`
-	
+```python
+mamba env create -f environment.yml --name aemf
+conda activate aemf
+```
 3. Install the IPython kernel with the aemf environment:
-
-	`python -m ipykernel install --user --name aemf --display-name "IPython - aemf"`
-
+```python
+python -m ipykernel install --user --name aemf --display-name "IPython - aemf"
+```
 ## Usage
 
 To build the JupyterBook website locally, run:
@@ -83,4 +83,4 @@ To run tests, navigate to the root directory of the project and execute the foll
 This project is licensed under the BSD 3-Clause License.
 
 ## Additional Information
-For more detailed information about the analysis and results, please refer to the main narrative notebook available here [here](https://ucb-stat-159-s23.github.io/project-Group28/main.html)
+For more detailed information about the analysis and results, please refer to the main narrative notebook available here [here](https://ucb-stat-159-s23.github.io/project-Group28/main.html).
