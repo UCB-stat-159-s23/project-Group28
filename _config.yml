@@ -16,7 +16,7 @@ only_build_toc_files: False
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/PPN271/stat_159_final.git  # Online location of your book
+  url: https://ucb-stat-159-s23.github.io/project-Group28/README.html
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
