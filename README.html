@@ -330,6 +330,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-structure">Repository Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-installation">Setup and Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-structure">Package Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">Additional Information</a></li>
@@ -353,7 +354,9 @@ document.write(`
 </section>
 <section id="dataset">
 <h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h2>
-<p>The dataset used in this project comes from <a class="reference external" href="https://www.kaggle.com/datasets/dipeshkhemani/airbnb-cleaned-europe-dataset?resource=download">Kaggle</a> and contains information on Airbnb listings in Europe.</p>
+<p>The dataset used in this project is the <a class="reference external" href="https://www.kaggle.com/dipeshkhemani/airbnb-cleaned-europe-dataset">Airbnb Cleaned Europe Dataset</a> available on Kaggle. The dataset contains listings information of Airbnb accommodations in various European cities. The dataset is cleaned and preprocessed, making it suitable for data analysis and modeling tasks.</p>
+<p>The dataset consists of 18 columns and 322,330 rows. Each row represents a unique listing, and the columns contain various attributes related to the listing, such as the listing name, host details, location, property details, price, availability, and reviews.</p>
+<p>To use this dataset, download the CSV file from the <a class="reference external" href="https://www.kaggle.com/dipeshkhemani/airbnb-cleaned-europe-dataset?resource=download">Kaggle page</a> and place it in the appropriate directory within your project.</p>
 </section>
 <section id="project-website">
 <h2>Project Website<a class="headerlink" href="#project-website" title="Permalink to this heading">#</a></h2>
@@ -376,15 +379,18 @@ document.write(`
 </section>
 <section id="setup-and-installation">
 <h2>Setup and Installation<a class="headerlink" href="#setup-and-installation" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Clone this repository:
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/UCB-stat-159-s23/project-Group28.git</span></code>
-<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">project-Group28</span></code></p></li>
-<li><p>Create and activate the aemf environment:
-<code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">environment.yml</span> <span class="pre">--name</span> <span class="pre">aemf</span></code>
-<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">aemf</span></code></p></li>
-<li><p>Install the IPython kernel with the aemf environment:
-<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">ipykernel</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">--name</span> <span class="pre">aemf</span> <span class="pre">--display-name</span> <span class="pre">&quot;IPython</span> <span class="pre">-</span> <span class="pre">aemf&quot;</span></code></p></li>
+<ol class="arabic">
+<li><p>Clone this repository:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/UCB-stat-159-s23/project-Group28.git</span></code>
+<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">project-Group28</span></code></p>
+</li>
+<li><p>Create and activate the aemf environment:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">environment.yml</span> <span class="pre">--name</span> <span class="pre">aemf</span></code>
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">aemf</span></code></p>
+</li>
+<li><p>Install the IPython kernel with the aemf environment:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">ipykernel</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">--name</span> <span class="pre">aemf</span> <span class="pre">--display-name</span> <span class="pre">&quot;IPython</span> <span class="pre">-</span> <span class="pre">aemf&quot;</span></code></p>
+</li>
 </ol>
 </section>
 <section id="usage">
@@ -401,6 +407,21 @@ document.write(`
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make all
 </pre></div>
 </div>
+</section>
+<section id="package-structure">
+<h2>Package Structure<a class="headerlink" href="#package-structure" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pipeline_utils</span></code> package is a collection of functions that facilitate the creation, evaluation, and display of results for different model pipelines. These pipelines consist of combinations of various imputers and models. The package includes the following functions:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">create_pipelines()</span></code>: This function creates a dictionary of pipelines with combinations of different imputers and models. It returns a dictionary with keys as imputer+model names and values as pipeline objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_summary(valid_errs,</span> <span class="pre">y_valid,</span> <span class="pre">ypred_valid)</span></code>: This function creates a summary table of validation errors, mean squared error (MSE), and mean absolute error (MAE) for different models. It takes a dictionary containing validation errors for different models, true target values for validation data, and a dictionary containing predicted target values for validation data from different models. It returns a summary table with model names, validation errors, MSE, and MAE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calculate_metrics(y_true,</span> <span class="pre">y_pred)</span></code>: This function calculates mean squared error (MSE), mean absolute error (MAE), and R-squared score for the given true and predicted target values. It takes true target values and predicted target values as input and returns a tuple containing MSE, MAE, and R-squared score.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">display_results(mse,</span> <span class="pre">mae,</span> <span class="pre">r2,</span> <span class="pre">model_name='knn_imputer+rf')</span></code>: This function creates a table to display evaluation metrics for a given model. It takes mean squared error, mean absolute error, R-squared score, and an optional model name as input. It returns a table displaying evaluation metrics for the given model.</p></li>
+</ol>
+<p>The package uses the following external libraries:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code>: For imputers, models, pipeline construction, and evaluation metrics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code>: For creating and manipulating dataframes.</p></li>
+</ul>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h2>
@@ -485,6 +506,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-structure">Repository Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-installation">Setup and Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-structure">Package Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">Additional Information</a></li>
