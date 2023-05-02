@@ -320,7 +320,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data">Test data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-for-categorical-features">One-hot encoding for categorical features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data">Split the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-and-fit-data">Create pipelines and fit data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-use-the-best-estimator">Test data use the best estimator</a></li>
 </ul>
             </nav>
         </div>
@@ -334,6 +340,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="model-building-and-evaluation">
 <h1>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this heading">#</a></h1>
+<section id="import-the-packages">
+<h2>Import the packages<a class="headerlink" href="#import-the-packages" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -368,6 +376,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="load-the-data">
+<h2>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/filtered_data.csv&#39;</span><span class="p">)</span>
@@ -387,10 +398,12 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="one-hot-encoding-for-categorical-features">
+<h2>One-hot encoding for categorical features<a class="headerlink" href="#one-hot-encoding-for-categorical-features" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># One-hot encoding for categorical features</span>
-<span class="n">cat_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Room Type&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Room Type&#39;</span><span class="p">]</span>
 <span class="n">enc</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
 <span class="n">encoded_features</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">[</span><span class="n">cat_features</span><span class="p">])</span>
 <span class="n">encoded_features_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">encoded_features</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">enc</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(</span><span class="n">cat_features</span><span class="p">))</span>
@@ -414,6 +427,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="split-the-data">
+<h2>Split the data<a class="headerlink" href="#split-the-data" title="Permalink to this heading">#</a></h2>
 <p>We split the data into training, validation, and test sets, with 80% of the data for training and 20% for testing. We further split the training data into an 80-20 split for training and validation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -429,6 +445,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="create-pipelines-and-fit-data">
+<h2>Create pipelines and fit data<a class="headerlink" href="#create-pipelines-and-fit-data" title="Permalink to this heading">#</a></h2>
 <p>We defined two imputers, SimpleImputer and KNNImputer, and three models, RandomForestRegressor, Lasso, and Ridge. This resulted in a total of six combinations of imputers and models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -493,6 +512,9 @@ document.write(`
 </div>
 </div>
 <p>We calculated the mean squared error (MSE) and mean absolute error (MAE) for each pipeline to evaluate their performance on the validation set.</p>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">create_summary</span><span class="p">(</span><span class="n">valid_errs</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="n">ypred_valid</span><span class="p">)</span>
@@ -573,8 +595,9 @@ document.write(`
 </div></div></div>
 </div>
 <p>Based on the results, the best model seems to be knn_imputer+rf	 with the highest validation score (0.749541). We will use this model to make predictions on the test data and evaluate its performance using MSE and MAE.</p>
-<section id="test-data">
-<h2>Test data<a class="headerlink" href="#test-data" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="test-data-use-the-best-estimator">
+<h2>Test data use the best estimator<a class="headerlink" href="#test-data-use-the-best-estimator" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model</span> <span class="o">=</span> <span class="n">tuned_pipelines</span><span class="p">[</span><span class="s1">&#39;knn_imputer+rf&#39;</span><span class="p">]</span>
@@ -725,7 +748,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data">Test data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-packages">Import the packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data">Load the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-for-categorical-features">One-hot encoding for categorical features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data">Split the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-and-fit-data">Create pipelines and fit data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-use-the-best-estimator">Test data use the best estimator</a></li>
 </ul>
   </nav></div>
 
