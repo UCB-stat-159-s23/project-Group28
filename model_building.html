@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Model Building and Evaluation &#8212; Airbnb Price Prediction in Europe</title>
   
@@ -44,6 +44,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -63,8 +64,9 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'model_building';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Data Preprocessing" href="data_cleaning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -154,8 +156,9 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="data_clean.html">Data Preprocessing</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data_cleaning.html">Data Preprocessing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Model Building and Evaluation</a></li>
 </ul>
 
     </div>
@@ -330,7 +333,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="model-building-and-evaluation">
-<h1>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this headline">#</a></h1>
+<h1>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -515,7 +518,7 @@ knn_imputer+ridge         0.577711  4135.279585  48.883405
 </div>
 <p>Based on the results, the best model seems to be simple_imputer+rf with the highest validation score (0.740893). We will use this model to make predictions on the test data and evaluate its performance using MSE and MAE.</p>
 <section id="test-data">
-<h2>Test data<a class="headerlink" href="#test-data" title="Permalink to this headline">#</a></h2>
+<h2>Test data<a class="headerlink" href="#test-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model_name</span> <span class="o">=</span> <span class="s1">&#39;simple_imputer+rf&#39;</span>
@@ -606,6 +609,15 @@ Test MAE for simple_imputer+rf: 35.80202521655956
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="data_cleaning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Preprocessing</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
