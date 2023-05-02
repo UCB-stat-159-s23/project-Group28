@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Airbnb Price Prediction in Europe</title>
+    <title>Project Group 28: Airbnb Europe Dataset Analysis &#8212; Airbnb Price Prediction in Europe</title>
   
   
   
@@ -309,7 +309,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Project Group 28: Airbnb Europe Dataset Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -318,9 +318,14 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-website">Project Website</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-structure">Repository Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-installation">Setup and Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-interactive-binder">Launch Interactive Binder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -331,7 +336,59 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><a class="reference external" href="https://classroom.github.com/a/LiaEl886"><img alt="Review Assignment Due Date" src="https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg" /></a></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="project-group-28-airbnb-europe-dataset-analysis">
+<h1>Project Group 28: Airbnb Europe Dataset Analysis<a class="headerlink" href="#project-group-28-airbnb-europe-dataset-analysis" title="Permalink to this heading">#</a></h1>
+<p>This project aims to analyze the Airbnb Europe dataset, which is available on <a class="reference external" href="https://www.kaggle.com/datasets/dipeshkhemani/airbnb-cleaned-europe-dataset?resource=download">Kaggle</a>. We explore various data cleaning, preprocessing, and modeling techniques to extract insights from the dataset and make predictions.</p>
+<section id="project-website">
+<h2>Project Website<a class="headerlink" href="#project-website" title="Permalink to this heading">#</a></h2>
+<p>The project’s JupyterBook website can be accessed <a class="reference external" href="https://ucb-stat-159-s23.github.io/project-Group28/main.html">here</a></p>
+</section>
+<section id="repository-structure">
+<h2>Repository Structure<a class="headerlink" href="#repository-structure" title="Permalink to this heading">#</a></h2>
+<p>The repository is structured as follows:</p>
+<ul class="simple">
+<li><p>‘data/’: Contains the raw dataset and processed data files</p></li>
+<li><p>‘figures/’: Contains the generated figures and plots</p></li>
+<li><p>‘results/’: Contains the results obtained from model training and evaluation</p></li>
+<li><p>‘utils/’: Contains utility functions and modules used throughout the project</p></li>
+<li><p>‘main.ipynb’: Main project notebook, providing an overview of the analysis and results</p></li>
+<li><p>‘data_cleaning.ipynb’: Notebook containing data cleaning and preprocessing steps</p></li>
+<li><p>‘model_building.ipynb’: Notebook containing model training and evaluation steps</p></li>
+<li><p>‘environment.yml’: Environment file with required packages for the project</p></li>
+<li><p>‘Makefile’: Makefile to build JupyterBook for the repository and manage other tasks</p></li>
+</ul>
+</section>
+<section id="setup-and-installation">
+<h2>Setup and Installation<a class="headerlink" href="#setup-and-installation" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Clone this repository:
+git clone <a class="github reference external" href="https://github.com/UCB-stat-159-s23/project-Group28.git">UCB-stat-159-s23/project-Group28.git</a>
+cd project-Group28</p></li>
+<li><p>Create and activate the aemf environment:
+mamba env create -f environment.yml –name aemf
+conda activate aemf</p></li>
+<li><p>Install the IPython kernel with the aemf environment:
+python -m ipykernel install –user –name aemf –display-name “IPython - aemf”</p></li>
+</ol>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<p>To build the JupyterBook website locally, run:
+make html</p>
+<p>To clean up build files, run:
+make clean</p>
+<p>To execute all notebooks, run:
+make all</p>
+</section>
+<section id="launch-interactive-binder">
+<h2>Launch Interactive Binder<a class="headerlink" href="#launch-interactive-binder" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group28.git/main"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading">#</a></h2>
+<p>This project is licensed under the BSD 3-Clause License.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -381,9 +438,14 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-website">Project Website</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-structure">Repository Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-installation">Setup and Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-interactive-binder">Launch Interactive Binder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
