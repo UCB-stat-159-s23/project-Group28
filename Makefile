@@ -4,10 +4,11 @@
 env :
 	mamba env create -f environment.yml --name aemf
 	bash -ic 'conda activate aemf;python -m ipykernel install --user --name aemf --display-name "IPython - aemf"'
+
 	
 all:
 	bash -ic 'conda activate aemf'
-	jupyter execute main.ipynb data_cleaning.ipynb model_building.ipynb
+	jupyter execute data_cleaning.ipynb model_building.ipynb main.ipynb
 
 ## - html    : Build static website for local display
 .PHONY: html
