@@ -8,7 +8,7 @@ env :
 	
 all:
 	bash -ic 'conda activate aemf'
-	jupyter execute data_cleaning.ipynb model_building.ipynb main.ipynb
+	jupyter execute data_cleaning.ipynb data_visualization.ipynb model_building.ipynb main.ipynb
 
 ## - html    : Build static website for local display
 .PHONY: html
