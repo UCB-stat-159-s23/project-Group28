@@ -16,6 +16,7 @@ only_build_toc_files: False
 launch_buttons:
   binderhub_url: "https://mybinder.org"
   notebook_interface: "jupyterlab"
+  repo_url: "https://github.com/ucb-stat-159-s23/project-Group28/README.md"
 
 # Information about where the book exists on the web
 repository:
