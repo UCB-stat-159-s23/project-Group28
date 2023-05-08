@@ -21,7 +21,7 @@ repository:
 launch_buttons:
   binderhub_url: "https://mybinder.org"
   notebook_interface: "jupyterlab"
-  repo_url: "https://github.com/ucb-stat-159-s23/project-Group28"
+  repo_url: "https://github.com/UCB-stat-159-s23/project-Group28.git"
   
   
 # Add GitHub buttons to your book
