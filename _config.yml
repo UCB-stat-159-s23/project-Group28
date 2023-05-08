@@ -13,9 +13,9 @@ execute:
 
 only_build_toc_files: False
 
-aunch_buttons:
-  binderhub_url: "https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group28.git/main"  
-  use_binder_button: true
+launch_buttons:
+  binderhub_url: "https://mybinder.org"
+  notebook_interface: "jupyterlab"
 
 # Information about where the book exists on the web
 repository:
