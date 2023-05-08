@@ -208,6 +208,37 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="article-header-buttons">
 
 
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/git/https%3A//ucb-stat-159-s23.github.io/project-Group28/README.html/main?urlpath=lab/tree/main.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
 <a href="https://ucb-stat-159-s23.github.io/project-Group28/README.html" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
@@ -335,11 +366,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-building-and-evaluation">Model Building and Evaluation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-interpretation">Results and Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-building-and-evaluation">Model Building and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-interpretation">Results and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -739,8 +770,9 @@ document.write(`
 </div>
 </div>
 </section>
+</section>
 <section id="model-building-and-evaluation">
-<h3>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this heading">#</a></h3>
+<h2>Model Building and Evaluation<a class="headerlink" href="#model-building-and-evaluation" title="Permalink to this heading">#</a></h2>
 <p>In the Model Building and Evaluation section, various machine learning models are built to predict the price of Airbnb listings. The primary objective is to identify the most effective model for this purpose.</p>
 <p>To achieve this, the dataset is first split into training, validation, and testing sets. The training set is used to train the models, the validation set helps tune hyperparameters, and the testing set is employed to evaluate the final model’s performance.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
@@ -889,7 +921,7 @@ document.write(`
 </div>
 </section>
 <section id="results-and-interpretation">
-<h3>Results and Interpretation<a class="headerlink" href="#results-and-interpretation" title="Permalink to this heading">#</a></h3>
+<h2>Results and Interpretation<a class="headerlink" href="#results-and-interpretation" title="Permalink to this heading">#</a></h2>
 <p>In this project, various machine learning models were built and evaluated to find the best model for making predictions. The combination of KNN imputer and Random Forest Regressor (knn_imputer+rf) yielded the best performance among the tested models. The evaluation metrics, such as R-squared, Mean Squared Error (MSE), and Mean Absolute Error (MAE), were calculated for the test data. The results indicated that the chosen model provided a good balance between accuracy and interpretability.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,13 +979,12 @@ document.write(`
 </div>
 </section>
 <section id="conclusion">
-<h3>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h3>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>This Jupyter Book will take you through the entire process of building a machine learning model to predict Airbnb prices in Europe. You will gain valuable insights into the factors that influence pricing and learn how to leverage these insights to make better decisions as a host or guest.## Conclusion</p>
 <p>In this project, we have analyzed the Airbnb Europe dataset, performed data cleaning and preprocessing, and experimented with multiple imputation techniques and regression models to predict the price of Airbnb listings. Our best performing model utilized KNN imputation and a Random Forest regressor, providing satisfactory prediction results.</p>
 <p>Through our feature importance analysis, we have identified key factors that influence the price of Airbnb listings. These insights can be beneficial for both hosts and guests when determining appropriate pricing or evaluating listing options.</p>
 <p>As a future work, we could explore other advanced machine learning algorithms or ensemble techniques to improve our model’s performance. Additionally, incorporating more data, such as user reviews and historical pricing information, could help enhance our understanding of the factors affecting listing prices and improve the predictive power of our models.</p>
 <p>In conclusion, our project provides valuable insights into the Airbnb Europe dataset and demonstrates the potential of data-driven approaches in informing decision-making in the sharing economy.</p>
-</section>
 </section>
 </section>
 
@@ -1033,11 +1064,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-building-and-evaluation">Model Building and Evaluation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-interpretation">Results and Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-building-and-evaluation">Model Building and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-interpretation">Results and Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
   </nav></div>
 
