@@ -11,15 +11,24 @@ logo: dataset-cover.jpeg
 execute:
   execute_notebooks: 'off'
 
-only_build_toc_files: False
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/UCB-stat-159-s23/project-Group28.git
-  branch: main  # Which branch of the repository should be used when creating links (optional)
+  url: https://github.com/UCB-stat-159-s23/project-Group28
+  branch: HEAD  # Which branch of the repository should be used when creating links (optional)
   
   
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_repository_button: true
+   use_issues_button   : true
+
+
+launch_buttons:
+  binderhub_url: "https://mybinder.org"
+  notebook_interface: "jupyterlab"
