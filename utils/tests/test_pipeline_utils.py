@@ -3,7 +3,7 @@ import pandas as pd
 from utils.pipeline_utils import create_pipelines, create_summary, calculate_metrics, display_results
 
 def test_create_pipelines():
-	"""
+    """
     Test the create_pipelines function to ensure it returns a dictionary of pipelines
     with the correct keys and values being of type Pipeline.
     """
@@ -28,9 +28,8 @@ def test_create_pipelines():
         assert isinstance(value, Pipeline), f"{value} is not of type Pipeline"
 
 
-
 def test_create_summary():
-	"""
+    """
     Test the create_summary function to ensure it returns a DataFrame with the correct
     columns and number of rows.
     """
@@ -52,7 +51,7 @@ def test_create_summary():
 
 
 def test_calculate_metrics():
-	"""
+    """
     Test the calculate_metrics function to ensure it correctly calculates the mean squared error,
     mean absolute error, and R-squared score for the given true and predicted target values.
     """
@@ -65,7 +64,7 @@ def test_calculate_metrics():
     assert np.isclose(r2, 0.9486081370449679, atol=1e-8)
 
 def test_display_results():
-	"""
+    """
     Test the display_results function to ensure it returns a DataFrame with the correct
     evaluation metrics for the given model.
     """
