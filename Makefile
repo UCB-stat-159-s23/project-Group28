@@ -8,6 +8,7 @@ env :
 	
 all:
 	bash -ic 'conda activate aemf'
+	echo "This process will take about 30 mins"
 	jupyter execute data_cleaning.ipynb data_visualization.ipynb model_building.ipynb main.ipynb
 
 ## - html    : Build static website for local display
