@@ -77,7 +77,8 @@ The package uses the following external libraries:
 
 ## Testing
 To run tests, navigate to the root directory of the project and execute the following command:
-	`PYTHONPATH=./ pytest`
+	
+	PYTHONPATH=./ pytest
 
 ## License
 
